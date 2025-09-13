@@ -10,7 +10,7 @@ echo "Repo init success"
 echo "=================="
 
 # Clone local_manifests repository
-git clone -b main https://github.com/Mayuresh2543/local_manifests.git .repo/local_manifests
+git clone -b main https://github.com/ICECOLD90191/local_manifests.git .repo/local_manifests
 echo "============================"
 echo "Local manifest clone success"
 echo "============================"
@@ -19,16 +19,8 @@ echo "============================"
 /opt/crave/resync.sh
 echo "============================"
 
-rm -rf packages/apps/Updater
-git clone https://github.com/Mayuresh2543/lineage_packages_apps_Updater.git --depth=1 packages/apps/Updater
-rm -rf packages/apps/Trebuchet
-git clone https://github.com/Mayuresh2543/lineage_packages_apps_Trebuchet.git --depth=1 packages/apps/Trebuchet
-rm -rf build/release
-git clone https://github.com/mayuresh2543/android_build_release.git --depth=1 build/release
-echo "Custom sources synced"
-
 # Export
-export BUILD_USERNAME=mayuresh
+export BUILD_USERNAME=ICECOLD
 export BUILD_HOSTNAME=crave
 export TZ="Asia/India"
 echo "======= Export Done ======"
@@ -38,7 +30,7 @@ echo "======= Export Done ======"
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_stone-bp1a-userdebug
+lunch lineage_udon-userdebug
 echo "============="
 
 # Install clean
