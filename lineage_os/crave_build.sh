@@ -2,6 +2,7 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
+rm -rf prebuilts/clang/host/linux-x86
 
 # Rom source repo
 repo init -u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs
@@ -30,7 +31,7 @@ echo "======= Export Done ======"
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_udon-userdebug
+lunch lineage_udon-bp1a-userdebug
 echo "============="
 
 # Install clean
