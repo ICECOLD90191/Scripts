@@ -1,6 +1,7 @@
 
 #!/bin/bash
 
+rm -rf .repo/projects .repo/project-objects
 rm -rf .repo/local_manifests/
 rm -rf prebuilts/clang/host/linux-x86
 
