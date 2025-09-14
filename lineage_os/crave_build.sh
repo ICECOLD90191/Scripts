@@ -32,7 +32,7 @@ echo "======= Export Done ======"
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_udon-userdebug
+lunch lineage_udon-bp1a-userdebug
 echo "============="
 
 # Install clean
