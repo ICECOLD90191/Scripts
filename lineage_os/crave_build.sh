@@ -30,7 +30,7 @@ echo "======= Export Done ======"
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_udon-userdebug
+lunch lineage_udon-uq1a-userdebug
 echo "============="
 
 # Install clean
