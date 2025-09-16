@@ -1,5 +1,8 @@
 
 #!/bin/bash
+rm -rf device/linaro/hikey
+rm -rf device/linaro/hikey-common
+rm -rf device/amlogic/yukawa
 rm -rf .repo/local_manifests/
 rm -rf prebuilts/clang/host/linux-x86
 
@@ -27,6 +30,10 @@ export BUILD_USERNAME=ICECOLD
 export BUILD_HOSTNAME=crave
 export TZ="Asia/India"
 echo "======= Export Done ======"
+
+rm -rf device/linaro/hikey
+rm -rf device/linaro/hikey-common
+rm -rf device/amlogic/yukawa
 
 # Set up build environment
 . build/envsetup.sh
