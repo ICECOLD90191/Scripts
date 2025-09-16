@@ -16,7 +16,10 @@ echo "Local manifest clone success"
 echo "============================"
 
 # Sync the repositories
-/opt/crave/resync.sh
+#/opt/crave/resync.sh
+repo forall -c "git reset --hard"
+repo forall -c "git clean -fdx"
+repo sync -j$(nproc) --force-sync --no-clone-bundle --no-tags
 echo "============================"
 
 # Export
