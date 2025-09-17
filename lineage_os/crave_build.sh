@@ -46,5 +46,9 @@ echo "============="
 # Install clean
 m installclean
 
+
+# FIX: Force 64-bit only to avoid packaging conflicts
+export TARGET_SUPPORTS_32_BIT_APPS=false
+
 # Build rom
 m bacon
