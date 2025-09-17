@@ -48,7 +48,12 @@ m installclean
 
 
 # FIX: Force 64-bit only to avoid packaging conflicts
-export TARGET_SUPPORTS_32_BIT_APPS=false
+export TARGET_SUPPORTS_32_BIT_APPS=false          # Force 64-bit only (main fix)
+export BOARD_VNDK_VERSION=33                      # Fix VNDK conflicts
+export TARGET_ARCH_VARIANT=armv8-a                # Consistent architecture
+export TARGET_PREFER_32_BIT=false                 # Prefer 64-bit libraries
+export BOARD_USES_DOLBY=true                      # Explicitly enable Dolby
+export TARGET_COPY_OUT_VENDOR=vendor
 
 # Build rom
 m bacon
