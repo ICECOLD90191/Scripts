@@ -78,7 +78,11 @@ m installclean
 
 # Build rom
 echo -e "${GREEN}Starting ROM build at $(date)...${NC}"
-time m bacon
+# Complete override method
+make bacon -j$(nproc) \
+    TARGET_SUPPORTS_32_BIT_APPS=false \
+    TARGET_PREFER_32_BIT=false \
+    PRODUCT_PACKAGES_EXCLUDE="vendor-hardware_dolby_proprietary_vendor_lib_soundfx-lib_soundfx-0 vendor-hardware_dolby_proprietary_vendor_lib-lib-0"
 
 # Check build result
 if [ $? -eq 0 ]; then
