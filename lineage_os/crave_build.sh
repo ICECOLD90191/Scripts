@@ -44,18 +44,6 @@ export BUILD_USERNAME=ICECOLD
 export BUILD_HOSTNAME=crave
 export TZ="Asia/India"
 
-# DOLBY CONFLICT FIXES - Must be set before envsetup
-export TARGET_SUPPORTS_32_BIT_APPS=false
-export BOARD_VNDK_VERSION=33
-export TARGET_ARCH_VARIANT=armv8-a
-export TARGET_PREFER_32_BIT=false
-export BOARD_USES_DOLBY=true
-export TARGET_COPY_OUT_VENDOR=vendor
-
-# Performance optimizations
-export USE_CCACHE=1
-export CCACHE_DIR=~/.ccache
-export CCACHE_MAXSIZE=50G
 
 echo "======= Environment Setup Done ======"
 
@@ -79,10 +67,7 @@ m installclean
 # Build rom
 echo -e "${GREEN}Starting ROM build at $(date)...${NC}"
 # Complete override method
-make bacon -j$(nproc) \
-    TARGET_SUPPORTS_32_BIT_APPS=false \
-    TARGET_PREFER_32_BIT=false \
-    PRODUCT_PACKAGES_EXCLUDE="vendor-hardware_dolby_proprietary_vendor_lib_soundfx-lib_soundfx-0 vendor-hardware_dolby_proprietary_vendor_lib-lib-0"
+m bacon 
 
 # Check build result
 if [ $? -eq 0 ]; then
