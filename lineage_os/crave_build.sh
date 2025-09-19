@@ -15,6 +15,8 @@ rm -rf device/linaro/hikey-common
 rm -rf device/amlogic/yukawa
 rm -rf .repo/local_manifests/
 rm -rf prebuilts/clang/host/linux-x86
+rm -rf out/soong
+rm -rf out/target/product/udon/vendor
 
 # Rom source repo
 echo -e "${GREEN}Initializing repo...${NC}"
@@ -69,13 +71,3 @@ echo -e "${GREEN}Starting ROM build at $(date)...${NC}"
 # Complete override method
 m bacon 
 
-# Check build result
-if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✅ Build completed successfully!${NC}"
-    echo -e "${GREEN}ROM location: out/target/product/udon/lineage-*.zip${NC}"
-    ls -lah out/target/product/udon/lineage-*.zip 2>/dev/null || echo "ZIP file check failed"
-else
-    echo -e "${RED}❌ Build failed!${NC}"
-    echo -e "${RED}Check the error messages above${NC}"
-    exit 1
-fi
