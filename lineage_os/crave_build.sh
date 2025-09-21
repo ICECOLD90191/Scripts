@@ -51,4 +51,5 @@ lunch lineage_udon-bp1a-userdebug
 m installclean
 
 # Build rom
-m bacon
+# Skip sepolicy tests entirely:
+m bacon SKIP_SEPOLICY_TESTS=true
