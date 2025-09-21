@@ -8,6 +8,10 @@ rm -rf .repo/local_manifests/
 rm -rf prebuilts/clang/host/linux-x86
 rm -rf out/soong
 rm -rf out/target/product/udon/vendor
+# Remove the problematic generated sepolicy files
+rm -rf out/soong/.intermediates/system/sepolicy/contexts/vendor_service_contexts/
+rm -rf out/soong/.intermediates/system/sepolicy/precompiled_sepolicy/
+
 
 # Rom source repo
 repo init -u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs
