@@ -34,7 +34,7 @@ gh auth login --with-token < "$TOKEN_FILE"
 echo "Upload limit set to $GH_UPLOAD_LIMIT bytes"
 
 # Select the ROM zip
-ROM_ZIP="out/target/product/$DEVICE/lineage-22.2-20250922-udon.zip"
+ROM_ZIP="lineage-22.2-20250922-udon.zip"
 if [[ -f "$ROM_ZIP" && $(stat -c%s "$ROM_ZIP") -le $GH_UPLOAD_LIMIT ]]; then
     ZIP_FILES="$ROM_ZIP"
     echo "Selected ROM zip: $ROM_ZIP"
@@ -43,22 +43,11 @@ else
     exit 1
 fi
 
-# Select specific image files
-IMG_FILES=""
-for img_file in recovery.img vendor_boot.img boot.img; do
-    FULL_PATH="out/target/product/$DEVICE/$img_file"
-    if [[ -f "$FULL_PATH" && $(stat -c%s "$FULL_PATH") -le $GH_UPLOAD_LIMIT ]]; then
-        IMG_FILES+="$FULL_PATH "
-        echo "Selected image: $FULL_PATH"
-    else
-        echo "Skipping $FULL_PATH"
-    fi
-done
 
 # Create release (if it doesn’t exist)
 gh release create "$RELEASETAG" --repo "$REPONAME" --title "$RELEASETITLE" --generate-notes
 
 # Upload files
-gh release upload "$RELEASETAG" --repo "$REPONAME" $ZIP_FILES $IMG_FILES
+gh release upload "$RELEASETAG" --repo "$REPONAME" $ZIP_FILES 
 
 echo "Upload complete!"
