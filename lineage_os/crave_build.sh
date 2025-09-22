@@ -11,6 +11,7 @@ rm -rf out/target/product/udon/vendor
 # Remove the problematic generated sepolicy files
 rm -rf out/soong/.intermediates/system/sepolicy/contexts/vendor_service_contexts/
 rm -rf out/soong/.intermediates/system/sepolicy/precompiled_sepolicy/
+rm -rf out/soong/.intermediates/system/sepolicy/
 
 
 # Rom source repo
