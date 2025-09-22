@@ -1,13 +1,9 @@
 #!/bin/bash
-# Upload specific ROM build files to GitHub Release
-# Only uploads: ROM zip, recovery.img, vendor_boot.img, boot.img
-
-# Usage:
-# bash upload_rom.sh
+# Upload only the ROM zip to GitHub Release
+# Ignores all images
 
 # GitHub release details
 RELEASETAG="lineage-22.2-20250922"
-DEVICE="udon"
 REPONAME="ICECOLD90191/Outputs"
 RELEASETITLE="LineageOS 22.2 UDON-INITIAL"
 
@@ -33,21 +29,20 @@ gh auth login --with-token < "$TOKEN_FILE"
 : ${GH_UPLOAD_LIMIT:=2147483648}
 echo "Upload limit set to $GH_UPLOAD_LIMIT bytes"
 
-# Select the ROM zip
-ROM_ZIP="lineage-22.2-20250922-udon.zip"
-if [[ -f "$ROM_ZIP" && $(stat -c%s "$ROM_ZIP") -le $GH_UPLOAD_LIMIT ]]; then
-    ZIP_FILES="$ROM_ZIP"
-    echo "Selected ROM zip: $ROM_ZIP"
-else
-    echo "ROM zip not found or exceeds upload limit!"
+# Find ROM zip in current folder
+ROM_ZIP=$(ls lineage-22.2-*.zip 2>/dev/null | head -n 1)
+
+if [[ -z "$ROM_ZIP" ]]; then
+    echo "ROM zip not found in current directory!"
     exit 1
 fi
 
+echo "Selected ROM zip: $ROM_ZIP"
 
 # Create release (if it doesn’t exist)
 gh release create "$RELEASETAG" --repo "$REPONAME" --title "$RELEASETITLE" --generate-notes
 
-# Upload files
-gh release upload "$RELEASETAG" --repo "$REPONAME" $ZIP_FILES 
+# Upload only the ROM zip
+gh release upload "$RELEASETAG" --repo "$REPONAME" "$ROM_ZIP"
 
 echo "Upload complete!"
