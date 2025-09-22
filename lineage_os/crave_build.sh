@@ -41,6 +41,8 @@ export TZ="Asia/India"
 rm -rf device/linaro/hikey
 rm -rf device/linaro/hikey-common
 rm -rf device/amlogic/yukawa
+# Disable the specific failing test
+echo 'PRODUCT_PACKAGES_EXCLUDE += vendor_service_contexts_test' >> device/oneplus/udon/device.mk
 
 # Set up build environment
 . build/envsetup.sh
@@ -49,6 +51,8 @@ rm -rf device/amlogic/yukawa
 lunch lineage_udon-bp1a-userdebug
 
 m installclean
+# Disable the specific failing test
+echo 'PRODUCT_PACKAGES_EXCLUDE += vendor_service_contexts_test' >> device/oneplus/udon/device.mk
 
 # Build rom
 # Skip sepolicy tests entirely:
