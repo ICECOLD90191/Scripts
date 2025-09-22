@@ -29,11 +29,11 @@ gh auth login --with-token < "$TOKEN_FILE"
 : ${GH_UPLOAD_LIMIT:=2147483648}
 echo "Upload limit set to $GH_UPLOAD_LIMIT bytes"
 
-# Find ROM zip in current folder
-ROM_ZIP=$(ls lineage-22.2-*.zip 2>/dev/null | head -n 1)
+# Set ROM zip name explicitly
+ROM_ZIP="lineage-22.2-20250922-UNOFFICIAL-udon.zip"
 
-if [[ -z "$ROM_ZIP" ]]; then
-    echo "ROM zip not found in current directory!"
+if [[ ! -f "$ROM_ZIP" ]]; then
+    echo "ROM zip $ROM_ZIP not found in current directory!"
     exit 1
 fi
 
