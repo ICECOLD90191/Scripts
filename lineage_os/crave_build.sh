@@ -8,11 +8,6 @@ rm -rf .repo/local_manifests/
 rm -rf prebuilts/clang/host/linux-x86
 rm -rf out/soong
 rm -rf out/target/product/udon/vendor
-# Remove the problematic generated sepolicy files
-rm -rf out/soong/.intermediates/system/sepolicy/contexts/vendor_service_contexts/
-rm -rf out/soong/.intermediates/system/sepolicy/precompiled_sepolicy/
-rm -rf out/soong/.intermediates/system/sepolicy/
-
 
 # Rom source repo
 repo init -u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs
@@ -27,13 +22,12 @@ echo "Local manifest clone success"
 echo "============================"
 
 # Sync the repositories
-#/opt/crave/resync.sh
 repo forall -c "git reset --hard"
 repo forall -c "git clean -fdx"
 repo sync -j$(nproc) --force-sync --no-clone-bundle --no-tags
 echo "============================"
 
-# Export build environment variables (MOVED BEFORE envsetup)
+# Export build environment variables
 export BUILD_USERNAME=ICECOLD
 export BUILD_HOSTNAME=crave
 export TZ="Asia/India"
@@ -42,8 +36,6 @@ export TZ="Asia/India"
 rm -rf device/linaro/hikey
 rm -rf device/linaro/hikey-common
 rm -rf device/amlogic/yukawa
-# Disable the specific failing test
-echo 'PRODUCT_PACKAGES_EXCLUDE += vendor_service_contexts_test' >> device/oneplus/udon/device.mk
 
 # Set up build environment
 . build/envsetup.sh
@@ -51,10 +43,44 @@ echo 'PRODUCT_PACKAGES_EXCLUDE += vendor_service_contexts_test' >> device/oneplu
 # Lunch
 lunch lineage_udon-bp1a-userdebug
 
+# Install clean
 m installclean
-# Disable the specific failing test
-echo 'PRODUCT_PACKAGES_EXCLUDE += vendor_service_contexts_test' >> device/oneplus/udon/device.mk
+
+# Create the NFC conflict fix script
+cat > fix_nfc_conflict.sh << 'EOF'
+#!/bin/bash
+while true; do
+    CONTEXT_FILE="out/soong/.intermediates/system/sepolicy/contexts/vendor_service_contexts/android_common/udon/vendor_service_contexts"
+    if [ -f "$CONTEXT_FILE" ]; then
+        # Remove the conflicting hal_nfc_service entry, keep vendor_hal_nxpnfc_service
+        if grep -q "vendor\.nxp\.nxpnfc_aidl\.INxpNfc/default.*hal_nfc_service:s0" "$CONTEXT_FILE"; then
+            sed -i '/vendor\.nxp\.nxpnfc_aidl\.INxpNfc\/default.*hal_nfc_service:s0/d' "$CONTEXT_FILE"
+            echo "$(date): Fixed NFC conflict in vendor_service_contexts"
+        fi
+    fi
+    sleep 5
+done
+EOF
+
+chmod +x fix_nfc_conflict.sh
+
+# Start the fix script in background
+echo "Starting NFC conflict monitor..."
+./fix_nfc_conflict.sh &
+FIX_PID=$!
+
+# Function to cleanup on exit
+cleanup() {
+    echo "Stopping NFC conflict monitor..."
+    kill $FIX_PID 2>/dev/null
+    exit
+}
+
+# Set trap to cleanup on script exit
+trap cleanup EXIT INT TERM
 
 # Build rom
-# Skip sepolicy tests entirely:
-m bacon SKIP_SEPOLICY_TESTS=true
+echo "Starting build..."
+m bacon
+
+# The cleanup function will automatically kill the background script
