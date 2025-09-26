@@ -20,7 +20,7 @@ rm -rf out/target/product/udon/vendor
 
 # Rom source repo
 echo -e "${GREEN}Initializing repo...${NC}"
-repo init -u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs
+repo init -u https://github.com/LineageOS/android.git -b lineage-21.0 --git-lfs
 echo "=================="
 echo "Repo init success"
 echo "=================="
