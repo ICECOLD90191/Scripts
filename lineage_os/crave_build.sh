@@ -37,6 +37,10 @@ echo -e "${GREEN}Syncing repositories...${NC}"
 repo sync -j$(nproc) --force-sync --no-clone-bundle --no-tags
 echo "============================"
 
+#disable fsgen 
+rm -rf build/soong
+git clone -b lineage-22.2 https://github.com/ICECOLD90191/android_build_soong.git build/soong
+
 # Export build environment variables
 echo -e "${GREEN}Setting up build environment...${NC}"
 export BUILD_USERNAME=ICECOLD
