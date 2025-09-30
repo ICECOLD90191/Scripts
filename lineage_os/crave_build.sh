@@ -68,7 +68,7 @@ echo "====== Envsetup Done ======="
 
 # Lunch
 echo -e "${GREEN}Running lunch command...${NC}"
-lunch lineage_udon-ap4a-userdebug
+lunch lineage_udon-bp2a-userdebug
 echo -e "${GREEN}Lunch completed successfully${NC}"
 
 # Install clean
