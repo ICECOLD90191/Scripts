@@ -22,7 +22,7 @@ rm -rf out/target/product/udon/vendor
 
 # Rom source repo
 echo -e "${GREEN}Initializing repo...${NC}"
-repo init -u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
 echo "=================="
 echo "Repo init success"
 echo "=================="
@@ -68,7 +68,7 @@ echo "====== Envsetup Done ======="
 
 # Lunch
 echo -e "${GREEN}Running lunch command...${NC}"
-lunch lineage_udon-bp1a-userdebug
+lunch lineage_udon-ap4a-userdebug
 echo -e "${GREEN}Lunch completed successfully${NC}"
 
 # Install clean
