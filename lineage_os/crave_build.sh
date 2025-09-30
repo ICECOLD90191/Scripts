@@ -10,6 +10,8 @@ echo -e "${GREEN}Starting LineageOS 22.2 build with ultimate NFC fix...${NC}"
 
 # Clean problematic directories
 echo -e "${YELLOW}Cleaning problematic directories...${NC}"
+rm -rf out/
+rm -rf .repo/repo/
 rm -rf device/linaro/hikey
 rm -rf device/linaro/hikey-common
 rm -rf device/amlogic/yukawa
