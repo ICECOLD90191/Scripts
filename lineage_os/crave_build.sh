@@ -18,6 +18,9 @@ rm -rf device/amlogic/yukawa
 rm -rf .repo/local_manifests/
 rm -rf prebuilts/clang/host/linux-x86
 rm -rf out/soong
+rm -rf out/soong/.intermediates
+rm -rf out/soong/.bootstrap
+rm -rf out/soong/build.ninja
 rm -rf out/target/product/udon/vendor
 
 # Rom source repo
