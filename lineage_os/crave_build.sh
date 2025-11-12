@@ -25,7 +25,7 @@ rm -rf out/target/product/udon/vendor
 
 # Rom source repo
 echo -e "${GREEN}Initializing repo...${NC}"
-repo init -u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
 echo "=================="
 echo "Repo init success"
 echo "=================="
@@ -46,7 +46,7 @@ echo "============================"
 rm -rf build/soong
 rm -rf device/oneplus/udon
 git clone -b lineage-22.2 https://github.com/ICECOLD90191/android_build_soong.git build/soong
-git clone -b 15 https://github.com/ICECOLD90191/android_device_oneplus_udon.git device/oneplus/udon
+git clone -b main https://github.com/ICECOLD90191/android_device_oneplus_udon.git device/oneplus/udon
 # Export build environment variables
 echo -e "${GREEN}Setting up build environment...${NC}"
 export BUILD_USERNAME=ICECOLD
