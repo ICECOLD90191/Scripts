@@ -6,7 +6,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${GREEN}Starting LineageOS 22.2 build with ultimate NFC fix...${NC}"
+echo -e "${GREEN}Starting LineageOS 23.2 build with ultimate NFC fix...${NC}"
 
 # Clean problematic directories
 echo -e "${YELLOW}Cleaning problematic directories...${NC}"
@@ -42,11 +42,6 @@ echo -e "${GREEN}Syncing repositories...${NC}"
 repo sync -j$(nproc) --force-sync --no-clone-bundle --no-tags
 echo "============================"
 
-#disable fsgen 
-rm -rf build/soong
-rm -rf device/oneplus/udon
-git clone -b lineage-22.2 https://github.com/ICECOLD90191/android_build_soong.git build/soong
-git clone -b main https://github.com/ICECOLD90191/android_device_oneplus_udon.git device/oneplus/udon
 # Export build environment variables
 echo -e "${GREEN}Setting up build environment...${NC}"
 export BUILD_USERNAME=ICECOLD
@@ -72,7 +67,7 @@ echo "====== Envsetup Done ======="
 
 # Lunch
 echo -e "${GREEN}Running lunch command...${NC}"
-lunch lineage_udon-bp1a-userdebug
+lunch lineage_udon-bp2a-userdebug
 echo -e "${GREEN}Lunch completed successfully${NC}"
 
 # Install clean
