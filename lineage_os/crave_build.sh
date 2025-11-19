@@ -20,6 +20,7 @@ rm -rf out/soong/.bootstrap
 rm -rf out/soong/build.ninja
 rm -rf out/target/product/udon/vendor
 rm -rf hardware/pixelworks
+rm -rf device/oneplus/udon
 # Rom source repo
 echo -e "${GREEN}Initializing repo...${NC}"
 repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
