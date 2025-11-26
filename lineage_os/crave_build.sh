@@ -60,7 +60,7 @@ rm -rf device/amlogic/yukawa
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_udon-bp2a-userdebug
+lunch lineage_udon-bp2a-eng
 echo "============="
 
 # Install clean
