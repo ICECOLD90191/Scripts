@@ -38,6 +38,8 @@ echo "============================"
 # Sync the repositories
 repo sync -j$(nproc) --force-sync --no-clone-bundle --no-tags
 
+git clone -b lineage-23.0 https://github.com/ICECOLD90191/android_device_oneplus_udon device/oneplus/udon
+
 # Export build environment variables
 export BUILD_USERNAME=ICECOLD
 export BUILD_HOSTNAME=crave
