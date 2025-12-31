@@ -15,7 +15,8 @@ echo "Local manifest clone success"
 echo "============================"
 
 # Sync the repositories
-repo sync
+repo sync -c --no-tags --no-clone-bundle -j$(nproc --all) --force-sync
+
 echo "============================"
 
 # Export build environment variables
