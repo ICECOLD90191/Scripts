@@ -15,7 +15,7 @@ echo "Local manifest clone success"
 echo "============================"
 
 # Sync the repositories
-/opt/crave/resync.sh
+repo sync
 echo "============================"
 
 # Export build environment variables
@@ -24,9 +24,6 @@ export BUILD_HOSTNAME=crave
 export TZ="Asia/India"
 
 # Clean again after repo sync
-rm -rf device/linaro/hikey
-rm -rf device/linaro/hikey-common
-rm -rf device/amlogic/yukawa
 
 # Set up build environment
 . build/envsetup.sh
