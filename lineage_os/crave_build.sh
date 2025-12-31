@@ -3,7 +3,8 @@
 rm -rf .repo/local_manifests/
 
 # Rom source repo
-repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs --depth=1
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --depth=1 --groups=all,-notdefault,-device,-partner,-darwin,-otatools
+
 echo "=================="
 echo "Repo init success"
 echo "=================="
