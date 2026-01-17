@@ -16,8 +16,16 @@ echo "============================"
 
 # Sync the repositories
 repo sync -c --no-tags --no-clone-bundle -j$(nproc --all) --force-sync
-
 echo "============================"
+
+# --- CCACHE SETUP ---
+export USE_CCACHE=1
+export CCACHE_EXEC=/usr/bin/ccache
+# This sets the path where ccache data is stored (default is ~/.ccache)
+export CCACHE_DIR=$HOME/.ccache 
+# Initialize ccache and set size to 100GB
+ccache -M 100G
+echo "====== CCACHE Enabled (100GB) ======="
 
 # Export build environment variables
 export BUILD_USERNAME=ICECOLD
