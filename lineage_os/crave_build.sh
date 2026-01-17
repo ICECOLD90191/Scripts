@@ -3,8 +3,7 @@
 rm -rf .repo/local_manifests/
 
 # Rom source repo
-repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --depth=1 --groups=all,-notdefault,-device,-partner,-darwin,-otatools
-
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs --depth=1
 echo "=================="
 echo "Repo init success"
 echo "=================="
@@ -22,7 +21,7 @@ echo "============================"
 
 # Export build environment variables
 export BUILD_USERNAME=ICECOLD
-export BUILD_HOSTNAME=crave
+export BUILD_HOSTNAME=GARUDA
 export TZ="Asia/India"
 
 # Clean again after repo sync
@@ -34,9 +33,6 @@ echo "====== Envsetup Done ======="
 # Lunch
 lunch lineage_udon-bp2a-eng
 echo "============="
-
-# Install clean
-m installclean
 
 # Build rom
 m bacon
